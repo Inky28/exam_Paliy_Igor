@@ -2,8 +2,9 @@
 
 using namespace std;
 
-<<<<<<< HEAD
+bool CorrectCard(const char* NumberCard);
 void ShowCardNumber(const char NumberCard[], const int SIZE_CARD);
+void CheckInput(char NumberCard[], const int SIZE_CARD);
 
 int main()
 {
@@ -15,6 +16,11 @@ int main()
 	ShowCardNumber(NumberCard, SIZE_CARD);
 
 	cin.clear();
+	
+	if (CorrectCard(NumberCard))
+		cout << "\nAll is well with your card";
+	else
+		cout << "\nYou have problems with the card";
 	
 	return 0;
 }
@@ -29,7 +35,8 @@ void ShowCardNumber(const char NumberCard[], const int SIZE_CARD)
 		if (i == 3 || i == 7 || i == 11)
 			cout << " ";
 	}
-=======
+}
+
 bool CorrectCard(const char* NumberCard)
 {
 	int Sum = 0;
@@ -52,4 +59,32 @@ bool CorrectCard(const char* NumberCard)
 	return 0 == Sum % 10;
 }
 
->>>>>>> a8f2732737afb188d4aa5cf942be93fa0d0ba35e
+void CheckInput(char NumberCard[], const int SIZE_CARD)
+{
+	bool exit = true;
+
+	do
+	{
+		cout << "Enter number card 16 characters\n";
+		cin.getline(NumberCard, SIZE_CARD + 1);
+
+		NumberCard[SIZE_CARD] = '\0';
+
+		for (size_t i = 0; i < SIZE_CARD; i++)
+		{
+			if (NumberCard[i] >= 0 && !(NumberCard[i] > ':') && !(NumberCard[i] < '/'))
+			{
+				if (i == SIZE_CARD - 1)
+					exit = false;
+			}
+			else
+			{
+				cout << "Incorrect input. Please try again\n";
+				cin.clear();
+				while (cin.get() != '\n');
+				break;
+			}
+		}
+	} while (exit);
+}
+
